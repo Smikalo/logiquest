@@ -1,0 +1,1152 @@
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\build.gradle.kts =====
+plugins {
+    // this is necessary to avoid the plugins to be loaded multiple times
+    // in each subproject's classloader
+    alias(libs.plugins.androidApplication) apply false
+    alias(libs.plugins.androidLibrary) apply false
+    alias(libs.plugins.composeMultiplatform) apply false
+    alias(libs.plugins.composeCompiler) apply false
+    alias(libs.plugins.kotlinJvm) apply false
+    alias(libs.plugins.kotlinMultiplatform) apply false
+    alias(libs.plugins.ktor) apply false
+}
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\gradle.properties =====
+#Kotlin
+kotlin.code.style=official
+kotlin.daemon.jvmargs=-Xmx3072M
+#Gradle
+org.gradle.jvmargs=-Xmx3072M -Dfile.encoding=UTF-8
+org.gradle.configuration-cache=true
+org.gradle.caching=true
+#Android
+android.nonTransitiveRClass=true
+android.useAndroidX=true
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\gradlew.bat =====
+@rem
+@rem Copyright 2015 the original author or authors.
+@rem
+@rem Licensed under the Apache License, Version 2.0 (the "License");
+@rem you may not use this file except in compliance with the License.
+@rem You may obtain a copy of the License at
+@rem
+@rem      https://www.apache.org/licenses/LICENSE-2.0
+@rem
+@rem Unless required by applicable law or agreed to in writing, software
+@rem distributed under the License is distributed on an "AS IS" BASIS,
+@rem WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+@rem See the License for the specific language governing permissions and
+@rem limitations under the License.
+@rem
+@rem SPDX-License-Identifier: Apache-2.0
+@rem
+
+@if "%DEBUG%"=="" @echo off
+@rem ##########################################################################
+@rem
+@rem  Gradle startup script for Windows
+@rem
+@rem ##########################################################################
+
+@rem Set local scope for the variables with windows NT shell
+if "%OS%"=="Windows_NT" setlocal
+
+set DIRNAME=%~dp0
+if "%DIRNAME%"=="" set DIRNAME=.
+@rem This is normally unused
+set APP_BASE_NAME=%~n0
+set APP_HOME=%DIRNAME%
+
+@rem Resolve any "." and ".." in APP_HOME to make it shorter.
+for %%i in ("%APP_HOME%") do set APP_HOME=%%~fi
+
+@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+set DEFAULT_JVM_OPTS="-Xmx64m" "-Xms64m"
+
+@rem Find java.exe
+if defined JAVA_HOME goto findJavaFromJavaHome
+
+set JAVA_EXE=java.exe
+%JAVA_EXE% -version >NUL 2>&1
+if %ERRORLEVEL% equ 0 goto execute
+
+echo. 1>&2
+echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH. 1>&2
+echo. 1>&2
+echo Please set the JAVA_HOME variable in your environment to match the 1>&2
+echo location of your Java installation. 1>&2
+
+goto fail
+
+:findJavaFromJavaHome
+set JAVA_HOME=%JAVA_HOME:"=%
+set JAVA_EXE=%JAVA_HOME%/bin/java.exe
+
+if exist "%JAVA_EXE%" goto execute
+
+echo. 1>&2
+echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME% 1>&2
+echo. 1>&2
+echo Please set the JAVA_HOME variable in your environment to match the 1>&2
+echo location of your Java installation. 1>&2
+
+goto fail
+
+:execute
+@rem Setup the command line
+
+set CLASSPATH=.
+
+
+@rem Execute Gradle
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" -jar "%APP_HOME%\gradle\wrapper\gradle-wrapper.jar" %*
+
+:end
+@rem End local scope for the variables with windows NT shell
+if %ERRORLEVEL% equ 0 goto mainEnd
+
+:fail
+rem Set variable GRADLE_EXIT_CONSOLE if you need the _script_ return code instead of
+rem the _cmd.exe /c_ return code!
+set EXIT_CODE=%ERRORLEVEL%
+if %EXIT_CODE% equ 0 set EXIT_CODE=1
+if not ""=="%GRADLE_EXIT_CONSOLE%" exit %EXIT_CODE%
+exit /b %EXIT_CODE%
+
+:mainEnd
+if "%OS%"=="Windows_NT" endlocal
+
+:omega
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\settings.gradle.kts =====
+rootProject.name = "demo1"
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+pluginManagement {
+    repositories {
+        google {
+            mavenContent {
+                includeGroupAndSubgroups("androidx")
+                includeGroupAndSubgroups("com.android")
+                includeGroupAndSubgroups("com.google")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        google {
+            mavenContent {
+                includeGroupAndSubgroups("androidx")
+                includeGroupAndSubgroups("com.android")
+                includeGroupAndSubgroups("com.google")
+            }
+        }
+        mavenCentral()
+    }
+}
+
+include(":composeApp")
+include(":server")
+include(":shared")
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\composeApp\build.gradle.kts =====
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+plugins {
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+}
+
+kotlin {
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
+    }
+
+    jvm("desktop")
+
+    sourceSets {
+        val androidMain by getting {
+            dependencies {
+                implementation(compose.preview)
+                implementation(libs.androidx.activity.compose)
+            }
+        }
+        val commonMain by getting {
+            dependencies {
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.ui)
+                implementation(compose.components.resources)
+                implementation(compose.components.uiToolingPreview)
+                implementation(libs.androidx.lifecycle.viewmodelCompose)
+                implementation(libs.androidx.lifecycle.runtimeCompose)
+                implementation(projects.shared)
+            }
+        }
+        val commonTest by getting {
+            dependencies {
+                implementation(libs.kotlin.test)
+            }
+        }
+
+        // THIS IS THE CRITICAL FIX:
+        val desktopMain by getting {
+            dependencies {
+                implementation(compose.desktop.currentOs)
+                implementation(libs.kotlinx.serialization.json)
+                implementation("net.java.dev.jna:jna:5.14.0")
+                implementation("net.java.dev.jna:jna-platform:5.14.0")
+            }
+        }
+    }
+}
+
+android {
+    namespace = "com.example.demo1"
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
+
+    defaultConfig {
+        applicationId = "com.example.demo1"
+        minSdk = libs.versions.android.minSdk.get().toInt()
+        targetSdk = libs.versions.android.targetSdk.get().toInt()
+        versionCode = 1
+        versionName = "1.0"
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+}
+
+compose.desktop {
+    application {
+        mainClass = "MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Exe, TargetFormat.Msi)
+            packageName = "demo"
+            packageVersion = "1.0.0"
+
+            windows {
+                shortcut = true
+                includeAllModules = true
+                menu = true
+                // ADD THIS LINE:
+                console = true
+            }
+        }
+    }
+}
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\composeApp\src\androidMain\kotlin\com\example\demo1\App.kt =====
+package com.example.demo1
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import org.jetbrains.compose.resources.painterResource
+import org.jetbrains.compose.ui.tooling.preview.Preview
+
+import demo1.composeapp.generated.resources.Res
+import demo1.composeapp.generated.resources.compose_multiplatform
+
+@Composable
+@Preview
+fun App() {
+    MaterialTheme {
+        var showContent by remember { mutableStateOf(false) }
+        Column(
+            modifier = Modifier
+                .background(MaterialTheme.colorScheme.primaryContainer)
+                .safeContentPadding()
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Button(onClick = { showContent = !showContent }) {
+                Text("Click me!")
+            }
+            AnimatedVisibility(showContent) {
+                val greeting = remember { Greeting().greet() }
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Image(painterResource(Res.drawable.compose_multiplatform), null)
+                    Text("Compose: $greeting")
+                }
+            }
+        }
+    }
+}
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\composeApp\src\androidMain\kotlin\com\example\demo1\MainActivity.kt =====
+package com.example.demo1
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
+        super.onCreate(savedInstanceState)
+
+        setContent {
+            App()
+        }
+    }
+}
+
+@Preview
+@Composable
+fun AppAndroidPreview() {
+    App()
+}
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\composeApp\src\desktopMain\kotlin\Main.kt =====
+import androidx.compose.ui.window.*
+import androidx.compose.ui.unit.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
+import ui.MainWindow
+import java.awt.Toolkit
+import java.io.File
+import java.io.PrintWriter
+import java.io.StringWriter
+
+fun main() {
+    try {
+        realMain()
+    } catch (e: Throwable) {
+        val logFile = File(System.getProperty("user.home"), "demo_crash.txt")
+        val sw = StringWriter()
+        e.printStackTrace(PrintWriter(sw))
+        logFile.writeText("CRASH REPORT:\n$sw")
+    }
+}
+
+fun realMain() = application {
+    var visible by remember { mutableStateOf(true) }
+
+    // Get Screen Size to position bottom right
+    val screenSize = Toolkit.getDefaultToolkit().screenSize
+    val windowWidth = 400
+    val windowHeight = 280
+
+    // Calculate position: Screen Width - Window Width - Padding
+    val posX = screenSize.width - windowWidth - 20
+    val posY = screenSize.height - windowHeight - 60 // -60 for Taskbar approximation
+
+    if (visible) {
+        Window(
+            onCloseRequest = { exitApplication() }, // Exit app when closed
+            title = "LogiQuest Battle",
+            undecorated = true,
+            resizable = false,
+            transparent = true, // Required for non-rectangular shapes if we used them
+            alwaysOnTop = true, // Keep the battle visible!
+            state = WindowState(
+                width = windowWidth.dp,
+                height = windowHeight.dp,
+                position = WindowPosition(posX.dp, posY.dp)
+            )
+        ) {
+            MainWindow(
+                onClose = { exitApplication() }
+            )
+        }
+    }
+}
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\composeApp\src\desktopMain\kotlin\ui\MainWindow.kt =====
+package ui
+
+import androidx.compose.animation.core.*
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.drawText
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.rememberTextMeasurer
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import util.AppMonitor
+import util.ActiveAppInfo
+
+@Composable
+fun MainWindow(onClose: () -> Unit) {
+    // State for the active app
+    val appInfo = produceState<ActiveAppInfo>(initialValue = ActiveAppInfo("SCANNING...", null)) {
+        AppMonitor.activeAppFlow().collect { value = it }
+    }
+
+    // Animations
+    val infiniteTransition = rememberInfiniteTransition()
+    // Monster floating
+    val bobbing by infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 10f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+    // Player breathing
+    val breathing by infiniteTransition.animateFloat(
+        initialValue = 1f,
+        targetValue = 1.02f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(1500, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+
+    val opponentName = appInfo.value.title.take(12).ifBlank { "DESKTOP" }
+
+    // Colors
+    val bgColor = Color(0xFFF8F8D8)
+    val uiColor = Color(0xFF303030)
+    val healthGreen = Color(0xFF50A040)
+    val healthYellow = Color(0xFFF0C030)
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .clip(RoundedCornerShape(8.dp))
+            .background(bgColor)
+            .border(4.dp, uiColor, RoundedCornerShape(8.dp))
+    ) {
+        // --- BATTLE SCENE AREA ---
+        Box(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth()
+        ) {
+            // 1. OPPONENT INFO (Top Left)
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(start = 12.dp, top = 12.dp)
+                    .background(Color.White.copy(alpha = 0.85f), RoundedCornerShape(4.dp))
+                    .border(2.dp, uiColor, RoundedCornerShape(4.dp))
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
+            ) {
+                Column {
+                    Text(opponentName.uppercase(), fontWeight = FontWeight.Bold, fontFamily = FontFamily.Monospace)
+                    Text(":L50", fontSize = 12.sp, fontFamily = FontFamily.Monospace)
+                    // HP Bar
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text("HP:", fontSize = 10.sp, fontFamily = FontFamily.Monospace, fontWeight = FontWeight.Bold)
+                        Spacer(Modifier.width(2.dp))
+                        Box(Modifier.width(80.dp).height(6.dp).background(Color.Gray).border(1.dp, uiColor)) {
+                            Box(Modifier.fillMaxWidth(0.8f).fillMaxHeight().background(healthGreen))
+                        }
+                    }
+                }
+            }
+
+            // 2. OPPONENT SPRITE (Top Right - Aligned with Name)
+            // We use the same top padding as the info box to align them visually
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(end = 20.dp, top = 12.dp + bobbing.dp)
+                    .size(80.dp)
+            ) {
+                // Generates a Monster that looks like an App Icon
+                ProceduralAppMonster(opponentName)
+            }
+
+            // 3. PLAYER SPRITE (Bottom Left - Fighter with Sword)
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .padding(start = 30.dp, bottom = 0.dp) // Sitting on the "floor"
+                    .size(120.dp)
+                    .scale(scaleX = 1f, scaleY = breathing)
+            ) {
+                SwordFighter()
+            }
+
+            // 4. PLAYER INFO (Bottom Right)
+            Box(
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(end = 12.dp, bottom = 12.dp)
+                    .background(Color.White.copy(alpha = 0.85f), RoundedCornerShape(4.dp))
+                    .border(2.dp, uiColor, RoundedCornerShape(4.dp))
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
+            ) {
+                Column {
+                    Text("DEVELOPER", fontWeight = FontWeight.Bold, fontFamily = FontFamily.Monospace)
+                    Text(":L99", fontSize = 12.sp, fontFamily = FontFamily.Monospace)
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text("HP:", fontSize = 10.sp, fontFamily = FontFamily.Monospace, fontWeight = FontWeight.Bold)
+                        Spacer(Modifier.width(2.dp))
+                        Box(Modifier.width(80.dp).height(6.dp).background(Color.Gray).border(1.dp, uiColor)) {
+                            Box(Modifier.fillMaxWidth(0.4f).fillMaxHeight().background(healthYellow))
+                        }
+                    }
+                    Text("42/100", fontSize = 10.sp, fontFamily = FontFamily.Monospace, modifier = Modifier.align(Alignment.End))
+                }
+            }
+        }
+
+        // --- TEXT BOX / MENU AREA (Fixed Bottom) ---
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .background(uiColor)
+                .padding(4.dp)
+        ) {
+            // Text Area
+            Box(
+                modifier = Modifier
+                    .weight(1.2f)
+                    .fillMaxHeight()
+                    .background(Color.White, RoundedCornerShape(4.dp))
+                    .border(2.dp, Color(0xFF606060), RoundedCornerShape(4.dp))
+                    .padding(12.dp)
+            ) {
+                Text(
+                    text = "Wild $opponentName\nappeared!",
+                    fontFamily = FontFamily.Monospace,
+                    fontSize = 16.sp,
+                    lineHeight = 22.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
+            Spacer(Modifier.width(4.dp))
+
+            // Action Menu
+            Column(
+                modifier = Modifier
+                    .weight(0.8f)
+                    .fillMaxHeight()
+                    .background(Color.White, RoundedCornerShape(4.dp))
+                    .border(2.dp, Color(0xFF606060), RoundedCornerShape(4.dp))
+            ) {
+                Row(Modifier.weight(1f).fillMaxWidth()) {
+                    MenuButton("FIGHT", Modifier.weight(1f))
+                    MenuButton("BAG", Modifier.weight(1f))
+                }
+                Row(Modifier.weight(1f).fillMaxWidth()) {
+                    MenuButton("PKMN", Modifier.weight(1f))
+                    MenuButton("RUN", Modifier.weight(1f), onClick = onClose)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun SwordFighter() {
+    Canvas(modifier = Modifier.fillMaxSize()) {
+        val w = size.width
+        val h = size.height
+        val color = Color(0xFF202020) // Silhouette color
+
+        // 1. Body (Hero back)
+        drawRect(
+            color = color,
+            topLeft = Offset(w * 0.3f, h * 0.5f),
+            size = Size(w * 0.4f, h * 0.5f)
+        )
+
+        // 2. Head (with spiky hair hint)
+        drawCircle(
+            color = color,
+            center = Offset(w * 0.5f, h * 0.4f),
+            radius = w * 0.15f
+        )
+
+        // 3. Right Arm (Holding sword)
+        val armPath = Path().apply {
+            moveTo(w * 0.7f, h * 0.55f) // Shoulder
+            lineTo(w * 0.9f, h * 0.45f) // Hand position
+        }
+        drawPath(path = armPath, color = color, style = Stroke(width = 12f))
+
+        // 4. Sword
+        val swordPath = Path().apply {
+            // Handle
+            moveTo(w * 0.9f, h * 0.45f)
+            lineTo(w * 0.95f, h * 0.5f)
+            // Blade
+            moveTo(w * 0.9f, h * 0.45f)
+            lineTo(w * 1.1f, h * 0.1f) // Pointing up-right
+        }
+        drawPath(path = swordPath, color = Color(0xFFE0E0E0), style = Stroke(width = 6f))
+
+        // Sword Guard
+        drawLine(
+            color = Color(0xFF808080),
+            start = Offset(w * 0.85f, h * 0.42f),
+            end = Offset(w * 0.95f, h * 0.48f),
+            strokeWidth = 8f
+        )
+    }
+}
+
+@Composable
+fun ProceduralAppMonster(appName: String) {
+    val textMeasurer = rememberTextMeasurer()
+    val initial = appName.firstOrNull()?.uppercase() ?: "?"
+
+    // Deterministic color based on app name
+    val hash = appName.hashCode()
+    val color1 = Color((hash * 12345).toInt() or 0xFF000000.toInt())
+    val color2 = Color((hash * 67890).toInt() or 0xFF000000.toInt())
+
+    Canvas(modifier = Modifier.fillMaxSize()) {
+        // 1. Shadow
+        drawOval(
+            color = Color.Black.copy(alpha = 0.3f),
+            topLeft = Offset(0f, size.height * 0.8f),
+            size = Size(size.width, size.height * 0.2f)
+        )
+
+        // 2. App Icon Shape (Rounded Rect)
+        val iconSize = size.width * 0.8f
+        val offset = (size.width - iconSize) / 2
+
+        drawRoundRect(
+            brush = Brush.linearGradient(listOf(color1, color2)),
+            topLeft = Offset(offset, 0f),
+            size = Size(iconSize, iconSize),
+            cornerRadius = CornerRadius(16f, 16f)
+        )
+
+        // 3. Border
+        drawRoundRect(
+            color = Color.White,
+            topLeft = Offset(offset, 0f),
+            size = Size(iconSize, iconSize),
+            cornerRadius = CornerRadius(16f, 16f),
+            style = Stroke(width = 4f)
+        )
+
+        // 4. Initial Letter
+        val textLayoutResult = textMeasurer.measure(
+            text = initial,
+            style = TextStyle(
+                fontSize = 40.sp,
+                fontWeight = FontWeight.ExtraBold,
+                color = Color.White,
+                fontFamily = FontFamily.Monospace
+            )
+        )
+
+        drawText(
+            textLayoutResult,
+            topLeft = Offset(
+                x = (size.width - textLayoutResult.size.width) / 2,
+                y = (iconSize - textLayoutResult.size.height) / 2
+            )
+        )
+
+        // 5. Angry Eyes (It's a battle!)
+        val eyeY = iconSize * 0.3f
+        val eyeSize = 8f
+        drawCircle(Color.Black, radius = eyeSize, center = Offset(offset + iconSize*0.3f, eyeY))
+        drawCircle(Color.Black, radius = eyeSize, center = Offset(offset + iconSize*0.7f, eyeY))
+
+        // Eyebrows (Angry)
+        drawLine(Color.Black, start = Offset(offset + iconSize*0.2f, eyeY - 10), end = Offset(offset + iconSize*0.4f, eyeY), strokeWidth = 4f)
+        drawLine(Color.Black, start = Offset(offset + iconSize*0.8f, eyeY - 10), end = Offset(offset + iconSize*0.6f, eyeY), strokeWidth = 4f)
+    }
+}
+
+@Composable
+fun MenuButton(text: String, modifier: Modifier = Modifier, onClick: () -> Unit = {}) {
+    val interactionSource = remember { MutableInteractionSource() }
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .border(1.dp, Color(0xFFD0D0D0))
+            .clickable(interactionSource = interactionSource, indication = null) { onClick() },
+        contentAlignment = Alignment.Center
+    ) {
+        Text(text, fontFamily = FontFamily.Monospace, fontWeight = FontWeight.ExtraBold, fontSize = 14.sp)
+    }
+}
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\composeApp\src\desktopMain\kotlin\util\AppMonitor.kt =====
+package util
+
+import androidx.compose.ui.graphics.ImageBitmap
+import com.sun.jna.platform.win32.User32
+import com.sun.jna.platform.win32.WinDef
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+
+data class ActiveAppInfo(
+    val title: String,
+    val icon: ImageBitmap? // We will leave this null and generate the icon in UI
+)
+
+object AppMonitor {
+    private val user32 = User32.INSTANCE
+
+    fun activeAppFlow(): Flow<ActiveAppInfo> = flow {
+        var lastHwnd: WinDef.HWND? = null
+
+        while (true) {
+            try {
+                val foregroundHwnd = user32.GetForegroundWindow()
+
+                if (foregroundHwnd != null) {
+                    if (foregroundHwnd != lastHwnd) {
+                        lastHwnd = foregroundHwnd
+                        val title = getWindowTitle(foregroundHwnd)
+
+                        // Filter out system noise
+                        if (title.isNotBlank() && title != "Default IME" && title != "MSCTFIME UI") {
+                            emit(ActiveAppInfo(title, null))
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                // Ignore temporary errors
+            }
+            delay(300) // Faster polling for responsiveness
+        }
+    }
+
+    private fun getWindowTitle(hwnd: WinDef.HWND): String {
+        val length = user32.GetWindowTextLength(hwnd)
+        if (length == 0) return ""
+
+        val buffer = CharArray(length + 1)
+        user32.GetWindowText(hwnd, buffer, length + 1)
+
+        // Clean up title (Remove " - Google Chrome" suffix if desired, or keep full)
+        val fullTitle = String(buffer).trim { it <= ' ' }
+
+        // Logic to extract app name from "File - AppName" format
+        return if (fullTitle.contains("-")) {
+            fullTitle.substringAfterLast("-").trim()
+        } else {
+            fullTitle
+        }
+    }
+}
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\gradle\libs.versions.toml =====
+[versions]
+agp = "8.5.2"
+android-compileSdk = "34"
+android-minSdk = "24"
+android-targetSdk = "34"
+androidx-activity = "1.9.3"
+androidx-appcompat = "1.7.0"
+androidx-core = "1.13.1"
+androidx-espresso = "3.6.1"
+androidx-lifecycle = "2.8.3"
+androidx-testExt = "1.2.1"
+composeMultiplatform = "1.7.0"
+junit = "4.13.2"
+kotlin = "2.0.20"
+kotlinxSerializationJson = "1.7.3" # Fixed from 1.8.1
+ktor = "3.0.1"                     # Fixed from 3.3.1
+logback = "1.5.6"
+
+[libraries]
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-testJunit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+junit = { module = "junit:junit", version.ref = "junit" }
+androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
+androidx-testExt-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-testExt" }
+androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "androidx-espresso" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
+androidx-lifecycle-viewmodelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
+androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+logback = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+ktor-serverCore = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor" }
+ktor-serverNetty = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor" }
+ktor-serverTestHost = { module = "io.ktor:ktor-server-test-host-jvm", version.ref = "ktor" }
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+ktor = { id = "io.ktor.plugin", version.ref = "ktor" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\gradle\wrapper\gradle-wrapper.properties =====
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.14.3-bin.zip
+networkTimeout=10000
+validateDistributionUrl=true
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\server\build.gradle.kts =====
+plugins {
+    alias(libs.plugins.kotlinJvm)
+    alias(libs.plugins.ktor)
+    application
+}
+
+group = "com.example.demo1"
+version = "1.0.0"
+application {
+    mainClass.set("com.example.demo1.ApplicationKt")
+
+    val isDevelopment: Boolean = project.ext.has("development")
+    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
+}
+
+dependencies {
+    implementation("com.google.genai:google-genai:1.28.0")
+    implementation("com.google.cloud:google-cloud-speech:4.75.0")
+    implementation(projects.shared)
+    implementation(libs.logback)
+    implementation(libs.ktor.serverCore)
+    implementation(libs.ktor.serverNetty)
+    testImplementation(libs.ktor.serverTestHost)
+    testImplementation(libs.kotlin.testJunit)
+    implementation("org.postgresql:postgresql:42.7.8")
+    implementation("com.zaxxer:HikariCP:7.0.2")
+}
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\server\src\main\kotlin\com\example\demo1\Application.kt =====
+package com.example.demo1
+
+import com.example.demo1.api.stt.STTService
+import io.ktor.server.application.*
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.*
+import java.io.File
+
+fun main() {
+    embeddedServer(Netty, port = SERVER_PORT, host = "0.0.0.0", module = Application::module)
+        .start(wait = true)
+}
+
+fun Application.module() {
+    routing {
+        post("/tts") {
+            val res = Thread.currentThread().contextClassLoader.getResource("audio/test.wav") ?: error("not")
+
+            val file = File(res.toURI())
+            val bytes = file.readBytes()
+            val stt = STTService(
+                projectId = "hackatum25mun-1088",
+                location = "eu",
+            )
+
+            val trans = stt.recognize(
+                audioBytes = bytes,
+                langCode = "en-US"
+            )
+
+            call.respondText(trans)
+        }
+    }
+}
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\server\src\main\kotlin\com\example\demo1\api\stt\Models.kt =====
+package com.example.demo1.api.stt
+
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class SttRequest(
+    val config: Config,
+    val content: String
+)
+
+@Serializable
+data class Config(
+    @SerialName("model")
+    val model: String = "chirp_3",
+
+    @SerialName("language_codes")
+    val languageCodes: List<String> = listOf("en-US"),
+
+    @SerialName("auto_decoding_config")
+    val autoDecodingConfig: Map<String, String> = emptyMap()
+)
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\server\src\main\kotlin\com\example\demo1\api\stt\STTService.kt =====
+package com.example.demo1.api.stt
+
+import com.google.cloud.speech.v2.RecognitionConfig
+import com.google.cloud.speech.v2.SpeechClient
+import com.google.cloud.speech.v2.RecognizerName
+import com.google.cloud.speech.v2.AutoDetectDecodingConfig
+import com.google.cloud.speech.v2.SpeechSettings
+import com.google.protobuf.ByteString
+import com.google.protobuf.FieldMask
+
+class STTService(
+    private val projectId: String,
+    private val location: String = "global",
+    private val recId: String = "_"
+) {
+    fun recognize(audioBytes: ByteArray, langCode: String): String {
+        val settings = SpeechSettings.newBuilder()
+            .setEndpoint("eu-speech.googleapis.com:443")
+            .build()
+
+        SpeechClient.create(settings).use { client ->
+            val recName = RecognizerName.of(projectId, location, recId)
+
+            val config = RecognitionConfig.newBuilder()
+                .setModel("chirp_3")
+                .addLanguageCodes(langCode)
+                .setAutoDecodingConfig(
+                    AutoDetectDecodingConfig.getDefaultInstance()
+                )
+                .build()
+
+            val configMask = FieldMask.newBuilder()
+                .addPaths("model")
+                .addPaths("language_codes")
+                .addPaths("auto_decoding_config")
+                .build()
+
+            val content = ByteString.copyFrom(audioBytes)
+
+            val response = client.recognize(recName, config, configMask, content)
+
+            val res = response.resultsList.firstOrNull()?.alternativesList?.firstOrNull()
+
+            return res?.transcript ?: ""
+        }
+    }
+}
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\server\src\main\kotlin\com\example\demo1\database\Database.kt =====
+package com.example.demo1.database
+
+import com.zaxxer.hikari.HikariConfig
+import com.zaxxer.hikari.HikariDataSource
+import java.sql.Connection
+
+class Database {
+    private val dataSource: HikariDataSource by lazy {
+        val config = HikariConfig().apply {
+            jdbcUrl = System.getenv("DB_URL")
+            username = System.getenv("DB_USER")
+            password = System.getenv("DB_PASSWORD")
+            driverClassName = "org.postgresql.Driver"
+
+            maximumPoolSize = 10
+            isAutoCommit = false
+            transactionIsolation = "TRANSACTION_REPEATABLE_READ"
+        }
+        HikariDataSource(config)
+    }
+
+    fun getConnection(): Connection = dataSource.connection
+}
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\server\src\main\kotlin\com\example\demo1\Repository\StateRepository.kt =====
+package com.example.demo1.Repository
+
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\shared\build.gradle.kts =====
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+plugins {
+    alias(libs.plugins.kotlinMultiplatform)
+    alias(libs.plugins.androidLibrary)
+    // CHANGE THIS LINE:
+    kotlin("plugin.serialization") version "2.0.20"
+}
+
+kotlin {
+    androidTarget {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_11)
+        }
+    }
+
+    jvm()
+
+    sourceSets {
+        commonMain.dependencies {
+            // put your Multiplatform dependencies here
+            implementation(libs.kotlinx.serialization.json)
+        }
+
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+        }
+    }
+}
+
+android {
+    namespace = "com.example.demo1.shared"
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    defaultConfig {
+        minSdk = libs.versions.android.minSdk.get().toInt()
+    }
+}
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\shared\src\androidMain\kotlin\com\example\demo1\Platform.android.kt =====
+package com.example.demo1
+
+import android.os.Build
+
+class AndroidPlatform : Platform {
+    override val name: String = "Android ${Build.VERSION.SDK_INT}"
+}
+
+actual fun getPlatform(): Platform = AndroidPlatform()
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\shared\src\commonMain\kotlin\com\example\demo1\Constants.kt =====
+package com.example.demo1
+
+const val SERVER_PORT = 8080
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\shared\src\commonMain\kotlin\com\example\demo1\Greeting.kt =====
+package com.example.demo1
+
+class Greeting {
+    private val platform = getPlatform()
+
+    fun greet(): String {
+        return "Hello, ${platform.name}!"
+    }
+}
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\shared\src\commonMain\kotlin\com\example\demo1\Platform.kt =====
+package com.example.demo1
+
+interface Platform {
+    val name: String
+}
+
+expect fun getPlatform(): Platform
+
+
+
+===== FILE: C:\Users\79779\Desktop\logiquest\hton\shared\src\jvmMain\kotlin\com\example\demo1\Platform.jvm.kt =====
+package com.example.demo1
+
+class JVMPlatform : Platform {
+    override val name: String = "Java ${System.getProperty("java.version")}"
+}
+
+actual fun getPlatform(): Platform = JVMPlatform()
+
+
+

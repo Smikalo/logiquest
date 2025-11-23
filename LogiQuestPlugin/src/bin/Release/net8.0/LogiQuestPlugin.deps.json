@@ -1,0 +1,169 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "LogiQuestPlugin/1.0.0": {
+        "dependencies": {
+          "PluginApi": "6.2.3.1011"
+        },
+        "runtime": {
+          "LogiQuestPlugin.dll": {}
+        }
+      },
+      "PluginApi/6.2.3.1011": {
+        "runtime": {
+          "PluginApi.dll": {
+            "assemblyVersion": "6.2.3.1011",
+            "fileVersion": "6.2.3.1011"
+          }
+        }
+      },
+      "SkiaSharp/2.88.0.0": {
+        "runtime": {
+          "SkiaSharp.dll": {
+            "assemblyVersion": "2.88.0.0",
+            "fileVersion": "2.88.8.0"
+          }
+        }
+      },
+      "Svg.Skia/2.0.0.0": {
+        "runtime": {
+          "Svg.Skia.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      },
+      "websocket-sharp/6.2.3.1011": {
+        "runtime": {
+          "websocket-sharp.dll": {
+            "assemblyVersion": "6.2.3.1011",
+            "fileVersion": "6.2.3.1011"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.0.0": {
+        "runtime": {
+          "Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.3.27908"
+          }
+        }
+      },
+      "YamlDotNet/16.0.0.0": {
+        "runtime": {
+          "YamlDotNet.dll": {
+            "assemblyVersion": "16.0.0.0",
+            "fileVersion": "16.3.0.0"
+          }
+        }
+      },
+      "LogiEventTracing/6.2.3.1011": {
+        "runtime": {
+          "LogiEventTracing.dll": {
+            "assemblyVersion": "6.2.3.1011",
+            "fileVersion": "6.2.3.1011"
+          }
+        }
+      },
+      "Svg.Model/2.0.0.0": {
+        "runtime": {
+          "Svg.Model.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      },
+      "ShimSkiaSharp/2.0.0.0": {
+        "runtime": {
+          "ShimSkiaSharp.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      },
+      "Svg.Custom/2.0.0.0": {
+        "runtime": {
+          "Svg.Custom.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.0.0.0"
+          }
+        }
+      },
+      "ExCSS/4.2.3.0": {
+        "runtime": {
+          "ExCSS.dll": {
+            "assemblyVersion": "4.2.3.0",
+            "fileVersion": "4.2.3.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "LogiQuestPlugin/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PluginApi/6.2.3.1011": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SkiaSharp/2.88.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Svg.Skia/2.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "websocket-sharp/6.2.3.1011": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Newtonsoft.Json/13.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "YamlDotNet/16.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "LogiEventTracing/6.2.3.1011": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Svg.Model/2.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ShimSkiaSharp/2.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Svg.Custom/2.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ExCSS/4.2.3.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

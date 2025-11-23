@@ -1,0 +1,9 @@
+pluginName: LogiQuest
+displayName: "LogiQuest Battle"
+version: 1.0.0
+author: "Hackathon Team"
+supportedDevices:
+    - LoupedeckCtFamily 
+    # Note: MX Series uses this family internally for the Action SDK
+minimumLoupedeckVersion: 6.0
+pluginFolderWin: bin

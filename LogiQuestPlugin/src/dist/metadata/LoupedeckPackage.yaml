@@ -1,0 +1,12 @@
+type: plugin4
+name: LogiQuest
+displayName: "LogiQuest Battle"
+description: "Hackathon Plugin"
+version: 1.0.0
+author: "Hackathon Team"
+pluginFileName: LogiQuestPlugin.dll
+pluginFolderWin: .
+supportedDevices:
+  - LoupedeckCtFamily
+minimumLoupedeckVersion: 6.0
+license: MIT

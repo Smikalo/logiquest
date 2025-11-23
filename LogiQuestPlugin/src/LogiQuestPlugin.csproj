@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <RootNamespace>Loupedeck.LogiQuestPlugin</RootNamespace>
+    <AssemblyName>LogiQuestPlugin</AssemblyName>
+    <PluginShortName>LogiQuest</PluginShortName>
+    <PluginApiDir Condition="$(OS) == 'Windows_NT'">C:\Program Files\Logi\LogiPluginService\</PluginApiDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="PluginApi">
+      <HintPath>$(PluginApiDir)PluginApi.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <!-- Explizites Kopieren des metadata Ordners -->
+  <Target Name="CopyPackage" AfterTargets="PostBuildEvent">
+    <ItemGroup>
+      <MetaFiles Include="package\metadata\**\*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(MetaFiles)" DestinationFolder="$(OutputPath)metadata\%(RecursiveDir)" />
+  </Target>
+</Project>

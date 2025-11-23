@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PluginApi</name>
+    </assembly>
+    <members>
+        <member name="T:Loupedeck.DeviceType">
+            <summary> Defines the device types supported by Loupedeck. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.None">
+            <summary> Reserved. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.LoupedeckOriginalFamily">
+            <summary> Represents any device in <b>Loupedeck Original Family</b>. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.Loupedeck10">
+            <summary> Represents <b>Loupedeck Original</b> device. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.Loupedeck15">
+            <summary> Represents <b>Loupedeck+</b> device. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.LoupedeckCtFamily">
+            <summary> Represents any device in <b>Loupedeck CT Family</b>. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.Loupedeck20">
+            <summary> Represents <b>Loupedeck CT</b> device. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.Loupedeck30">
+            <summary> Represents <b>Loupedeck Live</b> device. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.Loupedeck40">
+            <summary> Represents <b>Razer Stream Controller</b> device. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.Loupedeck50">
+            <summary> Represents <b>Loupedeck Live S</b> device. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.Loupedeck60">
+            <summary> Represents <b>Razer Stream Controller X</b> device. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.LoupedeckExtendedFamily">
+            <summary> Represents <b>Logitech MX Creative Console</b> devices. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.Loupedeck70">
+            <summary> Represents <b>Logitech MX Creative Keypad</b> device. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.Loupedeck71">
+            <summary> Represents <b>Logitech MX Creative Dialpad</b> device. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.Loupedeck72">
+            <summary> Represents <b>Logitech Actions Ring</b> device. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.LoupedeckBlockFamily">
+            <summary> Reserved. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.LoupedeckBlock1">
+            <summary> Reserved. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.LoupedeckBlock2">
+            <summary> Reserved. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.LoupedeckBlock3">
+            <summary> Reserved. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.LoupedeckBlock4">
+            <summary> Reserved. </summary>
+        </member>
+        <member name="F:Loupedeck.DeviceType.All">
+            <summary> Represents any device supported by Logi Plugin Service. </summary>
+        </member>
+        <member name="T:Loupedeck.PluginImageSize">
+            <summary> The size of the plugin image. </summary>
+        </member>
+        <member name="F:Loupedeck.PluginImageSize.None">
+            <summary> Image size is not specified. </summary>
+        </member>
+        <member name="F:Loupedeck.PluginImageSize.Width90">
+            <summary> Specifies a 80x80 pixel image. </summary>
+        </member>
+        <member name="F:Loupedeck.PluginImageSize.Width60">
+            <summary> Specifies a 50x50 pixel image. </summary>
+        </member>
+        <member name="F:Loupedeck.PluginImageSize.Width116">
+            <summary> Specifies a 116x116 pixel image. </summary>
+        </member>
+        <member name="T:Loupedeck.ClientApplicationStatus">
+            <summary> Status of the client application. </summary>
+        </member>
+        <member name="T:Loupedeck.ClientApplication">
+            <summary> This class can be used to link a Loupedeck plugin to an application. </summary>
+        </member>
+        <member name="M:Loupedeck.ClientApplication.GetProcessName">
+            <summary> Defines the application process that is connected to the plugin. </summary>
+            <remarks> For Windows applications, override this method to link one process to the plugin.
+                      See also <see cref="M:Loupedeck.ClientApplication.GetProcessNames" />. </remarks>
+            <returns> Process name. </returns>
+        </member>
+        <member name="M:Loupedeck.ClientApplication.GetBundleName">
+            <summary> Defines the application bundle that is connected to the plugin. </summary>
+            <remarks> For macOS applications, override this method to link one bundle to the plugin.
+                      See also <see cref="M:Loupedeck.ClientApplication.GetBundleNames" />. </remarks>
+            <returns> Bundle identifier. For example "com.apple.finder". </returns>
+        </member>
+        <member name="M:Loupedeck.ClientApplication.GetProcessNames">
+            <summary> Defines the application processes that are connected to the plugin. </summary>
+            <remarks> For Windows applications, override this method to link more than one process to the plugin.
+                      See also <see cref="M:Loupedeck.ClientApplication.GetProcessName" />. </remarks>
+            <returns> Process names. </returns>
+        </member>
+        <member name="M:Loupedeck.ClientApplication.GetBundleNames">
+            <summary> Defines the application bundles that are connected to the plugin. </summary>
+            <remarks> For macOS applications, override this method to link more than one bundle to the plugin.
+                      See also <see cref="M:Loupedeck.ClientApplication.GetBundleName" />. </remarks>
+            <returns> Bundle identifiers. </returns>
+        </member>
+        <member name="M:Loupedeck.ClientApplication.IsProcessNameSupported(System.String)">
+            <summary> Tests whether the given process name is supported by the plugin. </summary>
+            <param name="processName"> The name of the process to test. </param>
+            <returns>
+                <c>true</c> if the process name is supported, <c>false</c> otherwise. </returns>
+        </member>
+        <member name="M:Loupedeck.ClientApplication.IsProcessNameSupported(System.String,System.String)">
+            <summary> Tests whether the given process name is supported by the plugin. </summary>
+            <param name="processName"> The name of the process to test. </param>
+            <param name="processFilePath"> The full path of the main module of the process to test. </param>
+            <returns>
+                <c>true</c> if the process name is supported, <c>false</c> otherwise. </returns>
+        </member>
+        <member name="M:Loupedeck.ClientApplication.GetApplicationStatus">
+            <summary> Checks if the client application is installed. </summary>
+            <remarks> Override this method to define how the client application status is obtained. </remarks>
+            <returns> Status of the client application. </returns>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAction.RunCommand(System.String)">
+            <summary> This method is called when the user executes a command associated with the plugin. </summary>
+            <param name="actionParameter"> The string specifying the action parameter.
+                The value is <c>null</c> if this action does not have parameters. </param>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAction.GetCommandDisplayName(System.String,Loupedeck.PluginImageSize)">
+            <summary> This method is called when Loupedeck needs to show a command on the device or the UI. </summary>
+            <param name="actionParameter"> The string specifying the action parameter.
+                The value is <c>null</c> if this action does not have parameters. </param>
+            <param name="imageSize"> The size of the action image. </param>
+            <returns> The command display name. </returns>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAction.ActionImageChanged(System.String)">
+            <summary> Notifies the plugin service that the action display name and/or image has changed. </summary>
+            <param name="actionParameter"> The string specifying the action parameter.
+                The value is <c>null</c> if this action does not have parameters. </param>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAction.ActionImageChanged">
+            <summary> Notifies the plugin service that the action display name and/or image has changed. </summary>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAction.AdjustmentValueChanged(System.String)">
+            <summary> Notifies the plugin service that the adjustment value has changed. </summary>
+            <param name="actionParameter"> The string specifying the action parameter.
+                The value is <c>null</c> if this action does not have parameters. </param>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAction.AdjustmentValueChanged(Loupedeck.PluginAdjustmentValue)">
+            <summary> Notifies the plugin service that the adjustment value has changed. </summary>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAction.AdjustmentValueChanged(System.String,Loupedeck.PluginAdjustmentValue)">
+            <summary> Notifies the plugin service that the adjustment value has changed. </summary>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAction.AdjustmentValueChanged">
+            <summary> Notifies the plugin service that the adjustment value has changed. </summary>
+        </member>
+        <member name="T:Loupedeck.PluginDynamicAdjustment">
+            <summary> Defines the base class for dynamic adjustments. </summary>
+            <remarks> Inherit this class to implement a dynamic adjustment. </remarks>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAdjustment.#ctor(System.Boolean,Loupedeck.DeviceType)">
+            <summary> Initializes a new instance of the <see cref="T:Loupedeck.PluginDynamicAdjustment" /> class. </summary>
+            <param name="hasReset"> Specifies whether the adjustment supports the reset functionality. </param>
+            <param name="supportedDevices"> A bitmask of the devices supported by the adjustment. </param>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAdjustment.#ctor(System.String,System.String,System.String,System.Boolean,Loupedeck.DeviceType)">
+            <summary> Initializes a new instance of the <see cref="T:Loupedeck.PluginDynamicAdjustment" /> class. </summary>
+            <param name="displayName"> The name that is displayed in the Loupedeck Configuration UI. </param>
+            <param name="description"> The description of the adjustment. </param>
+            <param name="groupName"> The name of the group to which the adjustment belongs. </param>
+            <param name="hasReset"> Specifies whether the adjustment supports the reset functionality. </param>
+            <param name="supportedDevices"> A bitmask of the devices supported by the adjustment. </param>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAdjustment.ApplyAdjustment(System.String,System.Int32)">
+            <summary> This method is called when the dial associated with the plugin is rotated. </summary>
+            <param name="actionParameter"> The string specifying the action parameter.
+                 The value is <c>null</c> if this action does not have parameters. </param>
+            <param name="diff"> The number of the dial ticks that have been rotated.
+                 A positive value indicates clockwise rotation and a negative value indicates counter-clockwise rotation. </param>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAdjustment.GetAdjustmentValue(System.String)">
+            <summary> Gets the current value of the adjustment. </summary>
+            <param name="actionParameter"> The string specifying the action parameter.
+                The value is <c>null</c> if this action does not have parameters. </param>
+            <returns> The adjustment value. </returns>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAdjustment.AdjustmentValueChanged(System.String,System.Double)">
+            <summary> Notifies the plugin service that the adjustment value has changed. </summary>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicAdjustment.AdjustmentValueChanged(System.Double)">
+            <summary> Notifies the plugin service that the adjustment value has changed. </summary>
+        </member>
+        <member name="T:Loupedeck.PluginDynamicCommand">
+            <summary> Defines the base class for dynamic commands. </summary>
+            <remarks> Inherit this class to implement a dynamic command. </remarks>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicCommand.#ctor(Loupedeck.DeviceType)">
+            <summary> Initializes a new instance of the <see cref="T:Loupedeck.PluginDynamicCommand" /> class. </summary>
+            <param name="supportedDevices"> A bitmask that specifies the devices supported by the command. </param>
+        </member>
+        <member name="M:Loupedeck.PluginDynamicCommand.#ctor(System.String,System.String,System.String,Loupedeck.DeviceType)">
+            <summary> Initializes a new instance of the <see cref="T:Loupedeck.PluginDynamicCommand" /> class. </summary>
+            <param name="displayName"> The display name of the command. </param>
+            <param name="description"> The description of the command. </param>
+            <param name="groupName"> The name of the group to which the command belongs. </param>
+            <param name="supportedDevices"> A bitmask that specifies the devices supported by the command. </param>
+        </member>
+        <member name="T:Loupedeck.Plugin">
+            <summary> Defines the base class for Loupedeck plugins. </summary>
+            <remarks> Inherit this class to implement a Loupedeck plugin. </remarks>
+        </member>
+        <member name="P:Loupedeck.Plugin.HasNoApplication">
+            <summary> Gets a value indicating whether this is a Universal plugin or an Application plugin. </summary>
+            <remarks> Set this capability to <c>true</c> if your plugin is available as a Universal plugin.
+                      Set the value to <c>false</c> to make the plugin an Application plugin.
+                      Examples of Application plugins: Photoshop, Lightroom and CaptureOne.
+                      Examples of Universal plugins: OBS Studio, Philips Hue, Spotify. </remarks>
+        </member>
+        <member name="P:Loupedeck.Plugin.UsesApplicationApiOnly">
+            <summary> Gets a value indicating whether this is an API-only plugin. </summary>
+            <remarks> Set this capability to <c>true</c> if your plugin only uses an application-specific API
+                      to control the client application (the class implementing <see cref="T:Loupedeck.ClientApplication" />).
+                      This means it is not using shortcuts. Shortcuts can only be sent to a foreground application.
+                      This capability is always <c>true</c> for plugins controlling remote services, like Spotify or Philips Hue. </remarks>
+        </member>
+        <member name="M:Loupedeck.Plugin.Load">
+            <summary> This method is called when the plugin is loaded. </summary>
+        </member>
+        <member name="M:Loupedeck.Plugin.Unload">
+            <summary> This method is called when the plugin is unloaded. </summary>
+        </member>
+        <member name="P:Loupedeck.PluginActionBase`1.ResetDisplayName">
+            <summary>Gets or sets the display name of an adjustment reset command.</summary>
+        </member>
+        <member name="P:Loupedeck.PluginActionBase`1.ResetGroupName">
+            <summary>Gets or sets the group name of an adjustment reset command.</summary>
+        </member>
+    </members>
+</doc>
