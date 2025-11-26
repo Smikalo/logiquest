@@ -118,7 +118,7 @@ Run:
 
 ### 3. Install the Logitech Plugin
 
-The repository includes a ready-to-use plugin under:
+The repository includes a ready-to-use LogiQuest_1_0.lplug4 plugin under:
 
 ```
 LogiQuestPlugin/bin/Release/net8.0/
