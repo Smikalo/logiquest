@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LogiQuestPlugin")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59a253ec37dfc6c4ae4e81975040a79cb3f829a8")]
 [assembly: System.Reflection.AssemblyProductAttribute("LogiQuestPlugin")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LogiQuestPlugin")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

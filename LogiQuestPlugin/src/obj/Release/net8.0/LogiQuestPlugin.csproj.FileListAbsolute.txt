@@ -23,3 +23,4 @@ C:\Users\79779\Desktop\logiquest\LogiQuestPlugin\src\obj\Release\net8.0\LogiQues
 C:\Users\79779\Desktop\logiquest\LogiQuestPlugin\src\obj\Release\net8.0\refint\LogiQuestPlugin.dll
 C:\Users\79779\Desktop\logiquest\LogiQuestPlugin\src\obj\Release\net8.0\LogiQuestPlugin.pdb
 C:\Users\79779\Desktop\logiquest\LogiQuestPlugin\src\obj\Release\net8.0\ref\LogiQuestPlugin.dll
+C:\Users\79779\Desktop\logiquest\LogiQuestPlugin\src\obj\Release\net8.0\LogiQuestPlugin.sourcelink.json
